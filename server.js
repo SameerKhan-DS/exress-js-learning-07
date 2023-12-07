@@ -5,10 +5,13 @@ const PORT = process.env.PORT || 5000;
 const mainRouter = require("./routes/index");
 const productRouter = require("./routes/products");
 const ErrorHandler = require("./errors/ErrorHandler");
+var bodyParser = require("body-parser");
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(mainRouter);
 

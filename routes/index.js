@@ -13,6 +13,22 @@ router.get("/about", (req, res) => {
   res.render("about", { title: "about page" });
 });
 
+router.get("/contact", (req, res) => {
+  res.render("contact", { title: "contact page" });
+});
+
+router.get("/profile", (req, res) => {
+  res.render("profile", { title: "profile page" });
+});
+
+// router.post("/contact", (req, res) => {
+//   // res.render("contact", { title: "contact page" });
+//   console.log(req.body);
+//   res.json({
+//     message: req.body,
+//   });
+// });
+
 router.get("/download", (req, res) => {
   res.download(path.resolve(__dirname) + "/about.html");
 });

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs')%>
+
+    <title><%= title%></title>
+  </head>
+  <body>
+    <nav><%- include('../partials/nav.ejs')%></nav>
+    <h1>welcome to contact page</h1>
+    <div>
+      <form action="/profile" method="post" enctype="multipart/form-data">
+        <!-- <input type="text" name="userName" placeholder="user name" /> -->
+        <input type="file" name="avatar" />
+        <input type="file" name="gallery" multiple />
+        <button type="submit">submit</button>
+      </form>
+    </div>
+    <%- include('../partials/script.ejs')%>
+  </body>
+</html>

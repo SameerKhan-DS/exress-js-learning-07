@@ -6,8 +6,10 @@ const mainRouter = require("./routes/index");
 const productRouter = require("./routes/products");
 const ErrorHandler = require("./errors/ErrorHandler");
 var bodyParser = require("body-parser");
+const confiq = require('./confiq/confiq') 
 app.set("view engine", "ejs");
 
+app.locals = confiq;
 app.use(express.static("public"));
 app.use(express.json());
 

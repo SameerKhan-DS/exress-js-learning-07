@@ -54,7 +54,7 @@ router.post("/contact", (req, res, next) => {
   });
 });
 
-/**#NODEupload single file*/
+/**#NODE upload single file*/
 
 // router.post("/profile", upload.single("avatar"), function (req, res, next) {
 //   console.log(req.file, req.body, "req.file");
@@ -84,6 +84,7 @@ var fileFilter = function (req, file, cb) {
     cb(new Error("Only PNG files are allowed!"), false);
   }
 };
+
 const upload = multer({ dest: "uploads/", fileFilter });
 /** Multi file from multiple inputs tag */
 

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const apiKeyMiddleWare = require("../middlewares/apiKey");
-
 // router.use(apiKeyMiddleWare);
 
 router.get("/", (req, res) => {
@@ -31,6 +30,15 @@ router.get("/profile", (req, res) => {
 
 router.get("/download", (req, res) => {
   res.download(path.resolve(__dirname) + "/about.html");
+});
+
+router.get("/service", (req, res) => {
+  res.render("service", {
+    title: "service page",
+    marks: [
+      40, 60, 43, 65, 12
+    ]
+  });
 });
 
 /** can pass multiple using array */

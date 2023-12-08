@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs')%>
+
+    <title><%= title%></title>
+  </head>
+  <body>
+    <% let i = 0 %> <%# this will not be render%>
+
+    <nav><%- include('../partials/nav.ejs')%></nav>
+
+    <h1>Welcome to service page. <%= i%></h1>
+
+    <!--if condition -->
+
+    <!-- <% if(i == 10){ %>
+    <h3>condition true</h3>
+    <% } %> -->
+
+    <!-- if else -->
+    <!-- <% if(i == 10) { %> value is 10 <% } else { %> The value is not 10 <% }%> -->
+
+    <!-- if else if-->
+
+    <!-- <% if(i == 10) { %> value is 10 <% } else if (i == 11){ %> the value is 11
+    with condition <% } else {%> not true <% }%> <%-
+    include('../partials/script.ejs')%> -->
+
+    <!-- for loop -->
+    <!-- <% for(i = 0; i<=4 ; i++) { %>
+    <h3><%= i %> <%= marks[i]%></h3>
+    <% } %> -->
+
+    <!-- for in loop-->
+    <!-- <% for(const key in marks){ %> <%= key%> <% } %> -->
+
+    <!-- for in loop-->
+    <!-- <% for(const mark of marks) {%>
+        <%= mark%>
+    <% } %> -->
+
+    <!-- while loop -->
+    <!-- <% var VAL %> <% while(VAL<=4) { %> <%= marks[i] %> VAL++ <% } %> -->
+
+    <!-- for each loop-->
+    <!-- <% marks.forEach((value)=> { %> <%= value%> <% }) %> -->
+
+    <!-- function call -->
+    <!-- <% var current = new Date(); %>
+    <%= current %> -->
+
+    <!-- confiq file | global variable access-->
+    <!-- <%= productName %> -->
+    <p><%- productName %></p> 
+    <p><%= productName %></p> 
+  </body>
+</html>

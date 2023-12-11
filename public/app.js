@@ -1,3 +1,5 @@
+// const api = require("../services/axiosInstance");
+
 const App = () => {
   const [product, setproduct] = React.useState([]);
   const [form, updateForm] = React.useState({
@@ -8,11 +10,12 @@ const App = () => {
     fetchProduct();
   }, []);
 
-  function fetchProduct(params) {
+  async function fetchProduct(params) {
+
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setproduct(data);
       });
   }
@@ -66,30 +69,31 @@ const App = () => {
         console.log(data);
       });
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeHolder={"name"}
+          placeholder={"First name"}
           value={form.name}
           onChange={(e) => formUpdate(event, "name")}
         />
         <input
           type="text"
-          placeHolder={"name"}
+          placeholder={"Last name"}
           value={form.price}
           onChange={(e) => formUpdate(event, "price")}
         />
         <button type="submit">Submit</button>
       </form>
       <ul>
-        {product.map((item) => {
+        {product && product?.map((item) => {
           return (
             <div key={item.id}>
               <li>{item.name}</li>
               <li>{item.price}</li>
-              <button id="btn" onClick={() => deleteProduct(item.id)}>
+              <button id="btn" onClick={() => deleteProduct(item._id)}>
                 Delete
               </button>
             </div>

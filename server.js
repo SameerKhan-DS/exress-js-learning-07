@@ -2,11 +2,18 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 5000;
-const mainRouter = require("./routes/index");
-const productRouter = require("./routes/products");
-const ErrorHandler = require("./errors/ErrorHandler");
+const mainRouter = require("./src/routes/index");
+const productRouter = require("./src/routes/products");
+const ErrorHandler = require("./src/errors/ErrorHandler");
 var bodyParser = require("body-parser");
-const confiq = require('./confiq/confiq') 
+const confiq = require('./confiq/confiq');
+const dotenv = require('dotenv');
+const connectDB = require("./src/db");
+
+dotenv.config({
+  path: './.env'
+})
+
 app.set("view engine", "ejs");
 
 app.locals = confiq;
@@ -47,6 +54,14 @@ app.use((error, req, res, next) => {
 
   // next();
 });
-app.listen(PORT, () => {
-  console.log("server started");
-});
+
+
+connectDB()
+.then(() => {
+    app.listen(PORT, () => {
+        console.log(`⚙️ Server is running at port : ${PORT}`);
+    })
+})
+.catch((err) => {
+    console.log("MONGO db connection failed !!! ", err);
+})

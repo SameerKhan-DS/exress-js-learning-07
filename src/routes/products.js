@@ -1,58 +1,32 @@
 const router = require("express").Router();
 const ErrorHandler = require("../errors/ErrorHandler");
-let product = require("../productData");
+let product = require("../../productData");
 const multer = require("multer");
+const {
+  productController,
+  postProductController,
+  productGetController,
+  userController,
+  contactController,
+  deleteProductController,
+} = require("../controller/products.controller");
 
-router.get("/products", (req, res) => {
-  res.render("products", {
-    title: "Products Page",
-  });
-});
+/** Router of the site */
+router.get("/products", productController);
 
-router.get("/api/products", (req, res) => {
-  res.json(product);
-});
+router.get("/api/products", productGetController);
 
-router.post("/api/products", (req, res, next) => {
-  const { name, price } = req.body;
-  console.log(name, price);
-  if (!name || !price) {
-    // return res.status(422).json({ error: "all filed are required" });
+router.post("/api/products", postProductController);
 
-    // throw new Error("All filed are require");
-    next(ErrorHandler.validationError());
-  }
-  const newProduct = {
-    name: name,
-    price: price,
-    id: new Date().getTime().toString(),
-  };
-  product.push(newProduct);
+router.get("/user/add", userController);
 
-  res.json(newProduct);
-});
+router.post("/contact", contactController);
 
-router.get("/user/add", (req, res) => {
-  res.send(`
-  <form method="POST">
-  <div><input name="username"/></div>
-  <div><button type="submit">add user</button></div>
-  </form>
-  `);
-});
+router.delete("/api/products/:productId", deleteProductController);
 
-router.get("/user/add", (req, res) => {
-  res.json({
-    data: req.body,
-  });
-});
+/** END */
 
-router.post("/contact", (req, res, next) => {
-  console.log(req.body);
-  res.json({
-    status: req.body,
-  });
-});
+/** Multer implementation */
 
 /**#NODE upload single file*/
 
@@ -77,7 +51,6 @@ router.post("/contact", (req, res, next) => {
 
 /********** function to filter files */
 var fileFilter = function (req, file, cb) {
-  // Accept only PNG files
   if (file.mimetype === "image/png") {
     cb(null, true);
   } else {
@@ -106,10 +79,6 @@ router.post("/profile", cpUpload, function (req, res, next) {
   //
   // req.body will contain the text fields, if there were any
 });
-router.delete("/api/products/:productId", (req, res) => {
-  product = product.filter((item) => req.params.productId !== item.id);
-  res.json({
-    status: "OKAY",
-  });
-});
+/** END */
+
 module.exports = router;

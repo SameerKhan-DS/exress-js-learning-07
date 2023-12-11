@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5000;
 const mainRouter = require("./src/routes/index");
 const productRouter = require("./src/routes/products");
 const ErrorHandler = require("./src/errors/ErrorHandler");
+const session = require('express-session');
 var bodyParser = require("body-parser");
 const confiq = require('./confiq/confiq');
 const dotenv = require('dotenv');
@@ -13,6 +14,14 @@ const connectDB = require("./src/db");
 dotenv.config({
   path: './.env'
 })
+
+app.use(
+  session({
+    secret: 'your-secret-key', // Change this to a random string (used to sign the session ID cookie)
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.set("view engine", "ejs");
 

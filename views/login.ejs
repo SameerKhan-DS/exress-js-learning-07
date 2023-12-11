@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head.ejs')%>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <nav><%- include('../partials/nav.ejs')%></nav>
+    <h1>Welcome to the contact page</h1>
+    <div>
+      <form
+        id="loginForm"
+        method="POST"
+        enctype="application/x-www-form-urlencoded"
+        onsubmit="return validateForm()"
+      >
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <%- include('../partials/script.ejs')%>
+    <script>
+      function validateForm() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simple validation
+        if (!email || !password) {
+          alert("Both email and password are required");
+          return false;
+        }
+
+        // Additional custom validations can be added here
+
+        return true; // Form will be submitted if validation passes
+      }
+    </script>
+  </body>
+</html>

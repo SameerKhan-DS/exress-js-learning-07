@@ -2,9 +2,21 @@ const router = require("express").Router();
 const apiKeyMiddleWare = require("../middlewares/apiKey");
 // router.use(apiKeyMiddleWare);
 
-router.get("/", (req, res) => {
+const requireAuth = (req, res, next) => {
+  // Check if the user is authenticated (using session in this example)
+  if (req.session && req.session.user) {
+    // User is authenticated, continue to the next middleware or route handler
+    next();
+  } else {
+    // User is not authenticated, redirect to the login page
+    res.redirect('/login'); // Replace '/login' with your actual login page route
+  }
+};
+
+router.get("/", requireAuth, (req, res) => {
+  console.log(requireAuth, 'requireAuth');
   res.render("index", {
-    title: "my home page",
+    title: "My Home Page",
   });
 });
 
@@ -20,17 +32,12 @@ router.get("/profile", (req, res) => {
   res.render("profile", { title: "profile page" });
 });
 
-// router.post("/contact", (req, res) => {
-//   // res.render("contact", { title: "contact page" });
-//   console.log(req.body);
-//   res.json({
-//     message: req.body,
-//   });
-// });
 
 router.get("/download", (req, res) => {
   res.download(path.resolve(__dirname) + "/about.html");
 });
+
+
 
 router.get("/service", (req, res) => {
   res.render("service", {
@@ -40,19 +47,5 @@ router.get("/service", (req, res) => {
     ]
   });
 });
-
-/** can pass multiple using array */
-// router.get("/api/products", (req, res) => {
-//   res.json([
-//     {
-//       id: "123",
-//       name: "Chrome",
-//     },
-//     {
-//       id: "124",
-//       name: "new Chrome",
-//     },
-//   ]);
-// });
 
 module.exports = router;

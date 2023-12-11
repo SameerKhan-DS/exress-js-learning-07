@@ -11,6 +11,9 @@ const {
   deleteProductController,
 } = require("../controller/products.controller");
 
+const {
+  userRegistrationController, userRegistrationPostController, userLoginGetController, userLoginPostController
+} = require("../controller/user.controller");
 /** Router of the site */
 router.get("/products", productController);
 
@@ -18,11 +21,19 @@ router.get("/api/products", productGetController);
 
 router.post("/api/products", postProductController);
 
-router.get("/user/add", userController);
+// router.get("/user/add", userController);
 
 router.post("/contact", contactController);
 
 router.delete("/api/products/:productId", deleteProductController);
+
+router.get("/registration", userRegistrationController);
+
+router.post("/registration", userRegistrationPostController);
+
+router.get("/login", userLoginGetController);
+
+router.post("/login", userLoginPostController);
 
 /** END */
 

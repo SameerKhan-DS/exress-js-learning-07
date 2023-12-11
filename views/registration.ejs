@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head.ejs')%>
+  <title><%= title %></title>
+</head>
+<body>
+  <nav><%- include('../partials/nav.ejs')%></nav>
+  <h1>Please register here</h1>
+  <div>
+    <form id="registrationForm" method="POST" enctype="application/x-www-form-urlencoded" onsubmit="return validateForm()">
+      <input type="text" name="firstName" id="firstName" placeholder="First Name" required />
+      <input type="text" name="lastName" id="lastName" placeholder="Last Name" required />
+      <input type="email" name="email" id="email" placeholder="Email" required />
+      <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="Mobile Number" required />
+      <input type="password" name="password" id="password" placeholder="Password" required />
+      <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <%- include('../partials/script.ejs')%>
+  <script>
+    function validateForm() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const mobileNumber = document.getElementById('mobileNumber').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Simple validation
+      if (!firstName || !lastName || !email || !mobileNumber || !password || !confirmPassword) {
+        alert('All fields are required');
+        return false;
+      }
+
+      // Password matching validation
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return false;
+      }
+
+      // Additional custom validations can be added here
+
+      return true; // Form will be submitted if validation passes
+    }
+  </script>
+</body>
+</html>
